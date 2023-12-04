@@ -15,7 +15,11 @@ function App() {
       <p>Let's shop some bread and pastries</p>
       <ul>
         {products.map((product) => {
-          return <ProductItem key={product.id} product={product} />;
+          return (
+            <ProductItem key={product.id} product={product}>
+              <strong>{product.description}</strong>
+            </ProductItem>
+          );
         })}
       </ul>
     </div>
