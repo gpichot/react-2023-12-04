@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./ProductItem.module.css";
 
 type ProductItemProps = {
   product: {
@@ -8,11 +9,21 @@ type ProductItemProps = {
   children: React.ReactNode;
 };
 
+function useQuantity() {
+  const [quantity, setQuantity] = React.useState(0);
+
+  return {
+    quantity,
+    increment: () => setQuantity((q) => q + 1),
+    decrement: () => setQuantity((q) => q - 1),
+  };
+}
+
 export function ProductItem(props: ProductItemProps) {
   const { product, children } = props;
   const { name } = product;
   const [isHovered, setIsHovered] = React.useState(false);
-  const [quantity, setQuantity] = React.useState(0);
+  const { quantity, increment, decrement } = useQuantity();
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -22,13 +33,14 @@ export function ProductItem(props: ProductItemProps) {
   };
 
   const handleIncrement = () => {
-    setQuantity(quantity + 1);
+    increment();
   };
   const handleDecrement = () => {
-    setQuantity(quantity - 1);
+    decrement();
   };
   return (
     <li
+      className={styles.productItem}
       style={{ backgroundColor: isHovered ? "#88888811" : "#11111122" }}
       onClick={() => console.log(product)}
       onMouseEnter={handleMouseEnter}

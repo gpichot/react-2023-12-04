@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import { ProductItem } from "./components/ProductItem";
+import { ProductForm } from "./components/ProductForm";
 
 const products = [
   { id: 1, name: "Pain au chocolat", description: "Description 1" },
@@ -36,6 +37,7 @@ function App() {
           );
         })}
       </ul>
+      <ProductForm />
     </div>
   );
 }
