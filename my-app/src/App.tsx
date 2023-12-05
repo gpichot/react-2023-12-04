@@ -1,3 +1,4 @@
+import React from "react";
 import "./App.css";
 import { ProductItem } from "./components/ProductItem";
 
@@ -9,12 +10,25 @@ const products = [
 ];
 
 function App() {
+  const [searchText, setSearchText] = React.useState("");
+
+  const filteredProducts = products.filter((product) => {
+    return product.name.toLowerCase().includes(searchText.toLowerCase());
+  });
+
+  const handleSearchTextChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setSearchText(event.currentTarget.value);
+  };
   return (
     <div>
       <h1>My Bakery</h1>
       <p>Let's shop some bread and pastries</p>
+      <input type="text" value={searchText} onChange={handleSearchTextChange} />
+
       <ul>
-        {products.map((product) => {
+        {filteredProducts.map((product) => {
           return (
             <ProductItem key={product.id} product={product}>
               <strong>{product.description}</strong>
