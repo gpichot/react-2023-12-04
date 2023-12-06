@@ -17,7 +17,19 @@ export function useProductListQuery({ page }: { page: number }) {
     queryKey: ["products", { page }],
     queryFn: () => fetchProducts({ page }),
     placeholderData: keepPreviousData,
-    staleTime: 20 * 1000,
-    gcTime: 5 * 1000,
+    refetchOnWindowFocus: false,
+  });
+}
+async function fetchProductDetails(id: string) {
+  const response = await fetch(`https://bakery-api.fly.dev/products/${id}`);
+  await sleep();
+  const product = await response.json();
+  return product as Product;
+}
+
+export function useProductDetailQuery(id: string) {
+  return useQuery({
+    queryKey: ["products", id],
+    queryFn: () => fetchProductDetails(id),
   });
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./ProductItem.module.css";
 import { Product } from "../types";
+import { Link } from "react-router-dom";
 
 type ProductItemProps = {
   product: Product;
@@ -46,6 +47,7 @@ export function ProductItem(props: ProductItemProps) {
     >
       {name}
       {children}
+      <Link to={`/products/${product.id}`}>See details</Link>
       <div>
         <button onClick={handleIncrement}>+</button>
         {quantity}
