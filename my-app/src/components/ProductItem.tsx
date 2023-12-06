@@ -1,11 +1,9 @@
 import React from "react";
 import styles from "./ProductItem.module.css";
+import { Product } from "../types";
 
 type ProductItemProps = {
-  product: {
-    name: string;
-    description?: string;
-  };
+  product: Product;
   children: React.ReactNode;
 };
 
